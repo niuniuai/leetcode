@@ -14,7 +14,7 @@ var (
 
 func placeQueen(row, col, n int) {
 	rows[col] = 1
-	daig1[row-col+2*n] = 1
+	daig1[row-col] = 1
 	daig2[row+col] = 1
 	queens[row] = col
 
@@ -22,13 +22,13 @@ func placeQueen(row, col, n int) {
 
 func removeQueen(row, col, n int) {
 	rows[col] = 0
-	daig1[row-col+2*n] = 0
+	daig1[row-col] = 0
 	daig2[row+col] = 0
 	queens[row] = 0
 }
 
 func isAttack(row, col, n int) bool {
-	res := rows[col] + daig1[row-col+2*n] + daig2[row+col]
+	res := rows[col] + daig1[row-col] + daig2[row+col]
 	if res == 0 {
 		return false
 	}
@@ -71,5 +71,5 @@ func solveNQueens(n int) [][]string {
 }
 
 func main() {
-	fmt.Println(solveNQueens(1))
+	fmt.Println(solveNQueens(4))
 }
