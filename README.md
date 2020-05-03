@@ -28,9 +28,45 @@
 - 注意横纵坐标的起始位置，> <和>= <=的区别
 - 别忘了循环的退出条件，注意每一圈循环起始位置横纵坐标+1，结束位置横纵坐标-1
 - 只要startX<endX并且startY<endY，就可以继续环绕的第三步
-- 注意输入矩阵为nil的情况
+- 注意输入矩阵为空的情况
 
 ## leetcode-55
 始终比较两个值，当前可走的步数和之间的数组里可走的最大步程。如果这个值在未抵达终点前始终大于0，则可以继续。
 
 - 中途一旦出现不能抵达的情况，需要直接返回false.
+
+## leetcode-56
+首先按照二维数组的第一位进行排序，然后始终维护一个数组变量temp去保存当前的最大范围，如果下一个数组和该范围没有重叠部分，就把temp加进结果数组里面并更新temp数组。如果有重叠部分，则要视重叠情况更新temp数组。
+
+以下几个注意点：
+
+- 重叠分为两种情况，a)完全覆盖；b)部分覆盖；这两种情况更新状况不同。
+- 遍历到最后一个数组的时候，需要区分考虑。原因：每次将temp数组加入结果数组时都是因为下一个区间与temp不重合，而最后一个数组是因为没有下一个区间了。
+- 需要考虑数组为空的情况，还需要考虑数组个数为1的情况。
+- 注意golang里面只有值传递，因此append temp数组时传进去的是地址，必须复制temp数组的值再添进去。从注释里面可以看到，原本使用的是复制值的办法，后来发现有个copy函数，不用一个值一个值的复制，写起来更简洁。
+- 整理golang里面的sort方法。
+
+
+### golang里面sort方法 ###
+  1.普通排序 
+
+    对切片排序，普通类型如int,float,string
+    
+  2.自定义排序
+
+   a)结构体排序
+   实现以下三个函数
+
+    func (a Type)Len() int {}
+    func (a Type)Less(i,j int) bool {}
+    func (a Type)Swap(i,j int){}
+
+   b)golang提供以下几个方法对slice进行排序
+
+    func Slice(slice interface{}, less func(i, j int) bool) 
+    func SliceStable(slice interface{}, less func(i, j int) bool) 
+    func SliceIsSorted(slice interface{}, less func(i, j int) bool) bool 
+    func Search(n int, f func(int) bool) int
+  
+
+
