@@ -36,7 +36,6 @@ func generateMatrix(n int) [][]int {
 		endY--
 	}
 	return result
-
 }
 
 func main() {
