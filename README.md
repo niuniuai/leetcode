@@ -69,4 +69,6 @@
     func Search(n int, f func(int) bool) int
   
 
+## leetcode-57
 
+这里直接append再sort，套用了56的方法。事实上如果先找到插入的位置，也要newInterval能不能和前面的数组合并（最多只可能合并一个），再考虑后面的能不能全部合并，且必须遍历后面的数组。找插入点最快的二分查找复杂度o(logn),再合并应该是o(n)。而直接套用56的算法时间复杂度应该是o(nlogn)。
